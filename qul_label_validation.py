@@ -276,7 +276,7 @@ class WindowClass(QMainWindow, form_class) :
     ######################
     #program_type = 'INT TRAY Validation System' 
     #program_ver = " - v0.0.0.1" 
-    #10.86.254.36
+     
     #test / hp2035
     def msgbox_ok(self, title, message):
         #msg_str = '<h1 style="font-size:17pt; color: #4e9a06;">' + message + '</h1>'
@@ -310,7 +310,7 @@ class WindowClass(QMainWindow, form_class) :
         update_full_name =  os.path.join(cur_path, "label_update.exe")     
         #update_full_name = "C:/Users/wansoo.kim/python/Project1/label_validation/instantclient_21_3/label_update.exe"
         
-        conn_mes = cx_Oracle.connect('MPMGR/sckmes0$@210.118.145.240:1521/cpkmes1')
+        conn_mes = cx_Oracle.connect('mesdb')
         cur_mes = conn_mes.cursor()
 
         sql = "SELECT DATA1 FROM UPTDAT "
@@ -577,7 +577,7 @@ class WindowClass(QMainWindow, form_class) :
         
         try :
             
-            conn_sip = cx_Oracle.connect('rts/rts4sck0@10.86.255.11:1521/sipprd')
+            conn_sip = cx_Oracle.connect('sipdb')
             cur_sip = conn_sip.cursor()
             
             #for k in dic_tnr_box_list.keys() :
@@ -609,7 +609,7 @@ class WindowClass(QMainWindow, form_class) :
             #####################
             #####################
             if val_type == "REEL" or val_type == "TRAY"  :
-                conn_mes = cx_Oracle.connect('MPMGR/sckmes0$@210.118.145.240:1521/cpkmes1')
+                conn_mes = cx_Oracle.connect('mesdb')
                 cur_mes = conn_mes.cursor()
                 sql = "SELECT KEY1 FROM WIP_SITDEF2 "
                 sql = sql + "WHERE  FACTORY = 'MESPLUS' "
@@ -630,7 +630,7 @@ class WindowClass(QMainWindow, form_class) :
                 conn_mes.close()      
                 #########################  
             if val_type == "BOX"  : 
-                conn_mes = cx_Oracle.connect('MPMGR/sckmes0$@210.118.145.240:1521/cpkmes1')
+                conn_mes = cx_Oracle.connect('mesdb')
                 cur_mes = conn_mes.cursor()
                 sql = "SELECT KEY1 FROM WIP_SITDEF2 "
                 sql = sql + "WHERE  FACTORY = 'MESPLUS' "
@@ -1454,7 +1454,7 @@ class WindowClass(QMainWindow, form_class) :
             sys.exit(0)
             return False
         
-        conn_mes = cx_Oracle.connect('MPMGR/sckmes0$@210.118.145.240:1521/cpkmes1')
+        conn_mes = cx_Oracle.connect('mesdb')
         cur_mes = conn_mes.cursor()
         sql = "SELECT USER_NAME FROM SECUSR "        
         sql = sql + "WHERE USER_NAME = '" + str(suser) + "' "
@@ -1529,7 +1529,7 @@ class WindowClass(QMainWindow, form_class) :
         val_type = cur_tab_txt.upper()
         ###################
         
-        conn_sip = cx_Oracle.connect('rts/rts4sck0@10.86.255.11:1521/sipprd')
+        conn_sip = cx_Oracle.connect('sipdb')
         cur_sip = conn_sip.cursor()
             
         sql = "SELECT LOT_ID FROM T_LABEL_VALIDATION_HISTORY "
@@ -1565,7 +1565,7 @@ class WindowClass(QMainWindow, form_class) :
         
         chk_val_history_flag = False
         
-        conn_sip = cx_Oracle.connect('rts/rts4sck0@10.86.255.11:1521/sipprd')
+        conn_sip = cx_Oracle.connect('sipdb')
         cur_sip = conn_sip.cursor()
             
         sql = "SELECT LOT_ID FROM T_LABEL_VALIDATION_HISTORY "
@@ -1619,7 +1619,7 @@ class WindowClass(QMainWindow, form_class) :
         val_type = cur_tab_txt.upper()
                 
         #######
-        conn_mes = cx_Oracle.connect('MPMGR/sckmes0$@210.118.145.240:1521/cpkmes1')
+        conn_mes = cx_Oracle.connect('mesdb')
         cur_mes = conn_mes.cursor()
         sql = "SELECT KSY_GET_LOT_FROM_BRC('" + sTcard_lot + "') FROM DUAL "
         
@@ -1780,7 +1780,7 @@ class WindowClass(QMainWindow, form_class) :
         global label_2d
         
         
-        conn_mes = cx_Oracle.connect('MPMGR/sckmes0$@210.118.145.240:1521/cpkmes1')
+        conn_mes = cx_Oracle.connect('mesdb')
         cur_mes = conn_mes.cursor()
         
         sql = "SELECT BARCODE_01, BARCODE_02, MATRIX_DATA_01 FROM WIP_LABINF "
